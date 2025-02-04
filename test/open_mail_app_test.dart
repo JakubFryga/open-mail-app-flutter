@@ -6,16 +6,17 @@ import 'package:platform/platform.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  const channel = MethodChannel('open_mail_app');
+  // const channel = MethodChannel('open_mail_app');
   final log = <MethodCall>[];
 
-  channel.setMockMethodCallHandler((MethodCall methodCall) async {
-    log.add(methodCall);
-    if (methodCall.method == 'openMailApp') {
-      return true;
-    }
-    return null;
-  });
+  // TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+  //     .setMockMethodCallHandler((MethodChannel channel) async {
+  //   log.add(channel);
+  //   if (channel.method == 'openMailApp') {
+  //     return true;
+  //   }
+  //   return null;
+  // });
 
   tearDown(() {
     log.clear();

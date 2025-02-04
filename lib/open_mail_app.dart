@@ -129,9 +129,9 @@ class OpenMailApp {
     } else if (_isIOS) {
       final apps = await _getIosMailApps();
       if (apps.length == 1) {
-        final result = await launch(
-          apps.first.iosLaunchScheme,
-          forceSafariVC: false,
+        final result = await launchUrl(
+          Uri.parse(apps.first.iosLaunchScheme),
+          mode: LaunchMode.externalApplication,
         );
         return OpenMailAppResult(didOpen: result);
       } else {
@@ -170,9 +170,9 @@ class OpenMailApp {
         String? launchScheme =
             installedApps.first.composeLaunchScheme(emailContent);
         if (launchScheme != null) {
-          result = await launch(
-            launchScheme,
-            forceSafariVC: false,
+          result = await launchUrl(
+            Uri.parse(launchScheme),
+            mode: LaunchMode.externalApplication,
           );
         }
         return OpenMailAppResult(didOpen: result);
@@ -209,9 +209,9 @@ class OpenMailApp {
     } else if (_isIOS) {
       String? launchScheme = mailApp.composeLaunchScheme(emailContent);
       if (launchScheme != null) {
-        return await launch(
-          launchScheme,
-          forceSafariVC: false,
+        return await launchUrl(
+          Uri.parse(launchScheme),
+          mode: LaunchMode.externalApplication,
         );
       }
 
@@ -232,9 +232,8 @@ class OpenMailApp {
           false;
       return result;
     } else if (_isIOS) {
-      return await launch(
-        mailApp.iosLaunchScheme,
-        forceSafariVC: false,
+      return await canLaunchUrl(
+        Uri.parse(mailApp.iosLaunchScheme),
       );
     } else {
       throw Exception('Platform not supported');
@@ -271,7 +270,7 @@ class OpenMailApp {
   static Future<List<MailApp>> _getIosMailApps() async {
     var installedApps = <MailApp>[];
     for (var app in _supportedMailApps) {
-      if (await canLaunch(app.iosLaunchScheme) &&
+      if (await canLaunchUrl(Uri.parse(app.iosLaunchScheme)) &&
           !_filterList.contains(app.name.toLowerCase())) {
         installedApps.add(app);
       }
