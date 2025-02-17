@@ -232,9 +232,13 @@ class OpenMailApp {
           false;
       return result;
     } else if (_isIOS) {
-      return await canLaunchUrl(
-        Uri.parse(mailApp.iosLaunchScheme),
-      );
+      return await launchUrl(
+          Uri.parse(apps.first.iosLaunchScheme),
+          mode: LaunchMode.externalApplication,
+        );
+      // return await canLaunchUrl(
+      //   Uri.parse(mailApp.iosLaunchScheme),
+      // );
     } else {
       throw Exception('Platform not supported');
     }
