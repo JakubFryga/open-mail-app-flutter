@@ -233,7 +233,7 @@ class OpenMailApp {
       return result;
     } else if (_isIOS) {
       return await launchUrl(
-          Uri.parse(apps.first.iosLaunchScheme),
+          Uri.parse(mailApp.iosLaunchScheme),
           mode: LaunchMode.externalApplication,
         );
       // return await canLaunchUrl(
