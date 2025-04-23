@@ -1,11 +1,11 @@
 name: open_mail_app
 description: This library provides the ability to query the device for installed email apps and open those apps
-version: 0.5.0
+version: 1.0.0+1
 homepage: https://github.com/HomeXLabs/open-mail-app-flutter
 
 environment:
-  sdk: ">=3.3.0"
-  flutter: ">=3.19.0"
+  sdk: ">=3.4.3 <4.0.0"
+  flutter: ">=3.29.0"
 
 dependencies:
   platform: ^3.1.0
